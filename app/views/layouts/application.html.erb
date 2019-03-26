@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Homete</title>
+    <title>Cheer App</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,6 +10,17 @@
   </head>
 
   <body>
-    <%= yield %>
+    <%= render "shared/header" %>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <%= render "shared/flash" %>
+        </div>
+      </div>
+      <div class="row">
+        <%= yield %>
+      </div>
+    </div>
   </body>
 </html>

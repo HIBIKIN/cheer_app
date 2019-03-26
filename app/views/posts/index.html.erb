@@ -1,0 +1,11 @@
+<div class="col-12">
+<% @posts.each do |post| %>
+  <div>
+  <h5>投稿</h5>
+    <%= post.body %>
+    <p>５いいね</p>
+    <p>コメントする</p>
+  </div>
+  <hr>
+<% end %>
+</div>
