@@ -1,32 +1,33 @@
 <!-- app/views/shared/_header.html.erb -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
+<nav class="navbar navbar-expand-lg navbar-light mb-3 border-bottom">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <%= link_to "Cheer App", root_path, class: "navbar-brand" %>
+  <%= link_to "Cheer App", root_path, class: "navbar-brand mx-3", id: "header-logo" %>
   <div class="collapse navbar-collapse" id="navbarToggler">
-    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-      <li class="nav-item">
-        <%= link_to "Home", root_path, class: "nav-link" %>
+    <ul class="navbar-nav ml-auto mt-2 mt-lg-0 mr-3">
+      <li class="nav-item mx-3">
+        <%= link_to "Home", root_path, class: "nav-link text-info" %>
       </li>
-      
-      
+      <li class="nav-item mx-3">
+        <%= link_to "About", 'home/about', class: "nav-link text-info" %>
+      </li>
       <% if user_signed_in? %>
-        <li class="nav-item">
-          <%= link_to "ほめられる", new_post_path, class: "nav-link" %>
+        <li class="nav-item mx-3">
+          <%= link_to "ほめられる", new_post_path, class: "nav-link text-info" %>
         </li>
-        <li class="nav-item">
-          <%= link_to "編集する", edit_user_registration_path, class: "nav-link" %>
+        <li class="nav-item mx-3">
+          <%= link_to "編集する", edit_user_registration_path, class: "nav-link text-info" %>
         </li>
-        <li class="nav-item">
-          <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link" %>
+        <li class="nav-item mx-3">
+          <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link text-info" %>
         </li>
       <% else %>
-        <li class="nav-item">
-          <%= link_to "アカウント登録", new_user_registration_path, class: "nav-link" %>
+        <li class="nav-item mx-3">
+          <%= link_to "アカウント登録", new_user_registration_path, class: "nav-link text-info" %>
         </li>
-        <li class="nav-item">
-          <%= link_to "ログイン", new_user_session_path, class: "nav-link" %>
+        <li class="nav-item mx-3">
+          <%= link_to "ログイン", new_user_session_path, class: "nav-link text-info" %>
         </li>
       <% end %>
     </ul>

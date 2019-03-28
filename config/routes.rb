@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'home/about'
   get 'users/show'
   get 'likes/create'
   get 'likes/destroy'
