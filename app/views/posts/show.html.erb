@@ -1,8 +1,58 @@
-<!-- app/views/books/show.html.erb -->
+<!-- app/views/posts/show.html.erb -->
 
 <div class="col-md-10 offset-md-1 mt-5">
-
-  <hr>
   <h4>投稿</h4>
-  <%= simple_format @post.body %>
+  <div class="row border-bottom">
+    <div class="col-md-2">
+      <% if @post.user.avatar.attached? %>
+        <%= image_tag @post.user.avatar.variant(resize: "120x120"), class: "img-thumbnail" %>
+      <% else %>
+        <%= image_tag 'no_image.png', width: 120, class: "img-thumbnail" %>
+      <% end %>
+    </div>
+    <div class="col-md-10 pr-4">
+      <h4><%= @post.user.nick_name %></h4>
+      <% if user_signed_in? && @post.user_id == current_user.id %>
+        <%= link_to "編集", edit_post_path(@post), class: "btn btn-primary mt-2" %>
+        <%= button_tag "削除", class: "btn btn-warning mt-2", data: { toggle: "modal", target: "#delete-post" } %>
+      <% end %>
+      <hr>
+      <%= simple_format @post.body, class: "mt-2" %>
+      <p class="text-right"><%= @post.created_at.strftime("%Y年%m月%d日%H時%M分") %></p>
+    </div>
+    <div id="likes_buttons_<%= @post.id %>">
+      <%= render partial: 'likes/like', locals: { post: @post, likes: @likes} %>
+    </div>
+  </div>
+  <% if user_signed_in? && @post.user_id == current_user.id %>
+    <%= link_to "コメントする", new_post_review_path(@post), class: "btn btn-info my-2" %>
+  <% elsif user_signed_in? %>
+    <%= link_to "褒める", new_post_review_path(@post), class: "btn btn-info my-2" %>
+  <% end %>
+
+  <div class="row mt-3">
+    <%= render partial: "reviews/review", collection: @post.reviews %>
+  </div>
+  
+  <%= link_to "戻る", posts_path, class: "btn btn-secondary mt-2" %>
+</div>
+
+<div class="modal fade" id="delete-post">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">注意</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>削除しますか？</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal"><%= "キャンセル" %></button>
+        <%= link_to "削除", post_path(@post), method: :delete, class: "btn btn-danger" %>
+      </div>
+    </div>
+  </div>
 </div>

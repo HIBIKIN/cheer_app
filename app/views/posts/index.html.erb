@@ -1,11 +1,31 @@
 <div class="col-12">
 <% @posts.each do |post| %>
-  <div>
-  <h5>投稿</h5>
-    <%= post.body %>
-    <p>５いいね</p>
-    <p>コメントする</p>
+  <div class="row border-bottom mb-4">
+    <div class="col-md-2">
+      <% if post.user.avatar.attached? %>
+        <%= image_tag post.user.avatar.variant(resize: "120x120"), class: "img-thumbnail" %>
+      <% else %>
+        <%= image_tag "no_image.png", width: 120, class: "img-thumbnail" %>
+      <% end %>
+    </div>
+    <div class="col-md-10 pr-2">
+      <h4><%= post.user.nick_name %></h4>
+      <hr width=90%>
+      <%= link_to post, class: "btn text-dark col-md-12 text-left" do %>
+        <%= simple_format post.body, class: "mt-2" %>
+      <% end %>
+      <p class="text-right"><%= post.created_at.strftime("%Y年%m月%d日%H時%M分") %></p>
+    </div>
+
+    <div id="likes_buttons_<%= post.id %>">
+      <%= render partial: 'likes/like', locals: { post: post, likes: @likes} %>
+    </div>
+    <% if post.reviews_count.to_i > 0 %>
+      <%= link_to "#{post.reviews_count}件のコメント", post, class: "btn btn-default text-dark" %>
+      <br>
+    <% end %>
   </div>
-  <hr>
+
+  <!--  <%= link_to "詳しく見る", post, class: "btn btn-primary btn-sm mt-2"%> %>  -->
 <% end %>
 </div>

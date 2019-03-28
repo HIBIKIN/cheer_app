@@ -1,0 +1,10 @@
+<!-- app/views/reviews/_form.html.erb -->
+
+<%= form_with model: [post, review], local: true do |form| %>
+  <%= render "shared/errors", obj: review %>
+  <div class="form-group">
+    <%= form.text_area :comment, rows: 10, class: "form-control" %>
+  </div>
+  <%= form.submit class: "btn btn-primary" %>
+  <%= link_to "戻る", post, class: "btn btn-secondary" %>
+<% end %>
